@@ -92,22 +92,27 @@ public class HeapSort {
     
     public static void readData() {
         try {
-            reader = new BufferedReader(new FileReader(input));
-            String line = null;
+        	reader = new BufferedReader(new FileReader(input));
+        	String line = null;
             
-            while((line = reader.readLine()) != null) {
-                list.add(Integer.parseInt(line));
-            }
+        	while((line = reader.readLine()) != null) {
+                	list.add(Integer.parseInt(line));
+		}
             
         } catch (FileNotFoundException e) {
-            System.err.println("Caught FileNotFoundException: " + e.getMessage());
-            System.exit(1);
+        	System.err.println("Caught FileNotFoundException: " + e.getMessage());
+        	System.exit(1);
         } catch (IOException e) {
             System.err.println("Caught IOException: " + e.getMessage());
             System.exit(1);
-        } finally {
-            reader.close();
-        }
+        } 
+
+	try {	
+        	reader.close();
+	} catch (IOException e) {
+		System.err.println("Caught IOExeception: " + e.getMessage());
+		System.exit(1);
+	}
     }
     
     
