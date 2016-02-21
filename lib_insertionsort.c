@@ -45,6 +45,26 @@ int main(int argc, char *argv[]) {
 	}
 	size--; //To fix the offset of size increase
 
+    
+    /* insertion sort 
+    code modified from http://www.programmingsimplified.com/c/source-code/c-program-insertion-sort
+    */
+	int current, tmp, iter;
+	for(iter = 0; iter < size; iter++) {
+        current = iter;
+
+		while(current > 0 && list[current] < list[current-1]) {
+			tmp = list[current];
+			list[current] = list[current-1];
+			list[current-1] = tmp;
+
+			current--;
+		}
+	}
+
+	for(iter = 0; iter < size; iter++) {
+		printf("%i\n", list[iter]);
+	}
 
 	free(list);
 
