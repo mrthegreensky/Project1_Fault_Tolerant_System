@@ -1,21 +1,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+int insertionSort(char *input, char *output, double hazard, double time);
+
 int main(int argc, char *argv[]) {
+    int rv = insertionSort("asd", "dsf", 0, 0);
+    return rv;
+}
+
+
+int insertionSort(char *input, char *output, double hazard, double time) {
 
 	char *line = NULL;
 	int num = 0;
 
-	if(argc != 5) {
-		perror("Incorrect number of arguments. Input data name, output data name, hazard and time");
-		exit(EXIT_FAILURE);
-	}
-
 	FILE *fp;
-	fp = fopen(argv[1], "r");
+	fp = fopen(input, "r");
 
 	if(fp  == NULL) {
-		perror("Error opening file.\n");
+		perror("Error opening file");
 		exit(EXIT_FAILURE);
 	}
 
