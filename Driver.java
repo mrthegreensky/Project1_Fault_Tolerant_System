@@ -17,7 +17,6 @@ public class Driver {
 
 
     /* methods */
-
 	public static void InitInputs(String[] args) {
         input = new File(args[0]); //input
         output = new File(args[1]); //output
@@ -90,8 +89,6 @@ public class Driver {
 
         HeapSort hsort = new HeapSort();
         list = hsort.HeapSort(list);
-        
-		//HeapSort.HeapSort(list);
 
         writeData();
 		
