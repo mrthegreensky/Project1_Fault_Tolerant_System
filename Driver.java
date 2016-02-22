@@ -103,13 +103,13 @@ public class Driver {
         HeapSort hsort = new HeapSort();
         sortedList = hsort.HeapSort(list);
         
-        /*
+        
         int[] sortedList2 = new int[maxLines];
         MyInsertionSort insertionSort = new MyInsertionSort();
         System.loadLibrary("insertionSort");
         sortedList2 = insertionSort.insertionSort(list);
-        */
-        writeData(sortedList);
+        
+        writeData(sortedList2);
 		
 	}
 }
