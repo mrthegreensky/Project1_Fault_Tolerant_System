@@ -1,18 +1,14 @@
+#include <jni.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <jni.h>
+#include <string.h>
 #include "MyInsertionSort.h"
 
-int* insertionSort(jint *list);
+jint* insertionSort(jint *list);
 
-/*
-int main(int argc, char *argv[]) {
-    int rv = insertionSort("asd", "dsf", 0, 0);
-    return rv;
-}
-*/
 
-JNIEXPORT jintarray JNICALL Java_MyInsertionSort_insertionSort (JNIEnv *env, jobject object, jintArray list){
+JNIEXPORT jintArray JNICALL Java_MyInsertionSort_insertionSort
+(JNIEnv *env, jobject object, jintArray list){
     jsize len;
     jint *myCopy;
     jint *result;
@@ -32,13 +28,16 @@ JNIEXPORT jintarray JNICALL Java_MyInsertionSort_insertionSort (JNIEnv *env, job
 }
 
 
-int* insertionSort(jint *list) {
+jint* insertionSort(jint *old) {
 
 	int num = 0;
 
 	int *temp;
-	int size = 0;
-    
+	int size = sizeof(old);
+
+	int* list = malloc(sizeof(int)*size);
+	memcpy(list, old, sizeof(int)*size);
+
     /* insertion sort 
     code modified from http://www.programmingsimplified.com/c/source-code/c-program-insertion-sort
     */
@@ -60,6 +59,6 @@ int* insertionSort(jint *list) {
 		printf("%i\n", list[iter]);
 	}
      */
-    
-	return(list);
+	
+	return list;
 }
