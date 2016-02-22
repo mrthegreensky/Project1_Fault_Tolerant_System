@@ -54,7 +54,7 @@ public class Driver {
         }
     }
 
-    public static void writeData() {
+    public static void writeData(ArrayList<Integer> list) {
         try {
             writer = new PrintWriter(output);
         } catch (FileNotFoundException e) {
@@ -87,10 +87,18 @@ public class Driver {
 
         readData();
 
+        private static ArrayList<Integer> sortedList = new ArrayList<Integer>();
         HeapSort hsort = new HeapSort();
-        list = hsort.HeapSort(list);
-
-        writeData();
+        sortedList = hsort.HeapSort(list);
+        
+        
+        
+        private static ArrayList<Integer> sortedList2 = new ArrayList<Integer>();
+        MyInsertionSort insertionSort = new MyInsertionSort();
+        System.loadLibrary("insertionSort");
+        sortedList2 = insertionSort.insertionSort(list);
+        
+        writeData(sortedList);
 		
 	}
 }

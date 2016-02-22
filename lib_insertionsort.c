@@ -1,53 +1,43 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <jni.h>
+#include "MyInsertionSort.h"
 
-int insertionSort(char *input, char *output, double hazard, double time);
+int* insertionSort(int *list);
 
+/*
 int main(int argc, char *argv[]) {
     int rv = insertionSort("asd", "dsf", 0, 0);
     return rv;
 }
+*/
+
+JNIEXPORT jintarray JNICALL Java_MyInsertionSort_insertionSort (JNIEnv *env, jobject object, jintArray list){
+    jsize len;
+    jint *myCopy;
+    jint *result;
+    jboolean *is_copy = 0;
+    
+    len = (*env)->GetArrayLength(env, list);
+    myCopy = (jint *) (*env)->GetIntArrayElements(env, list, is_copy);
+    if (myCopy == NULL){
+        printf("Cannot obtain array from JVM\n");
+        exit(0);
+    }
+    
+    result = insertionSort(myCopy);
+    
+    return result;
+    
+}
 
 
-int insertionSort(char *input, char *output, double hazard, double time) {
+int* insertionSort(int *list) {
 
-	char *line = NULL;
 	int num = 0;
 
-	FILE *fp;
-	fp = fopen(input, "r");
-
-	if(fp  == NULL) {
-		perror("Error opening file");
-		exit(EXIT_FAILURE);
-	}
-
-	int *list, *temp;
+	int *temp;
 	int size = 0;
-
-	list = malloc(sizeof(int));
-	if(list == NULL) {
-		perror("Error mallocing memory");
-		exit(EXIT_FAILURE);
-	}
-
-	while(!feof(fp)) {
-
-		fscanf(fp, "%d", &num);
-		list[size] = num;
-
-		temp = realloc(list, (size+2)*sizeof(int));
-		if(temp != NULL) {
-			list = temp;
-			size++;
-		} else {
-			perror("Error reallocing memory");
-			free(list);
-			exit(EXIT_FAILURE);
-		}
-	}
-	size--; //To fix the offset of size increase
-
     
     /* insertion sort 
     code modified from http://www.programmingsimplified.com/c/source-code/c-program-insertion-sort
@@ -64,12 +54,12 @@ int insertionSort(char *input, char *output, double hazard, double time) {
 			current--;
 		}
 	}
-
+    
+    /*
 	for(iter = 0; iter < size; iter++) {
 		printf("%i\n", list[iter]);
 	}
-
-	free(list);
-
-	return(0);
+     */
+    
+	return(list);
 }
