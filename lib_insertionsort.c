@@ -21,9 +21,9 @@ JNIEXPORT jintArray JNICALL Java_MyInsertionSort_insertionSort
         exit(0);
     }
     
-    result = insertionSort(myCopy);
+    myCopy = insertionSort(myCopy);
     
-    return result;
+    return myCopy;
     
 }
 
