@@ -92,7 +92,6 @@ public class Driver {
         sortedList = hsort.HeapSort(list);
         
         
-        
         private static ArrayList<Integer> sortedList2 = new ArrayList<Integer>();
         MyInsertionSort insertionSort = new MyInsertionSort();
         System.loadLibrary("insertionSort");
