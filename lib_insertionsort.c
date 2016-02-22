@@ -3,7 +3,7 @@
 #include <jni.h>
 #include "MyInsertionSort.h"
 
-int* insertionSort(int *list);
+int* insertionSort(jint *list);
 
 /*
 int main(int argc, char *argv[]) {
@@ -32,7 +32,7 @@ JNIEXPORT jintarray JNICALL Java_MyInsertionSort_insertionSort (JNIEnv *env, job
 }
 
 
-int* insertionSort(int *list) {
+int* insertionSort(jint *list) {
 
 	int num = 0;
 
