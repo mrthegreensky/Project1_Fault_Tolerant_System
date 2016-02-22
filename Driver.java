@@ -6,9 +6,10 @@ import java.util.ArrayList;
 public class Driver {
 
 	/* variables */
-    private static ArrayList<Integer> list = new ArrayList<Integer>();
+    private static int[] list = null;
     private static BufferedReader reader = null;
     private static PrintWriter writer = null;
+    private static int maxLines = 0;
 
 	private static File input = null;
     private static File output = null;
@@ -29,13 +30,24 @@ public class Driver {
         }
     }
 
+
+    /*LineNumberReader modified from: http://stackoverflow.com/questions/453018/number-of-lines-in-a-file-in-java*/
     public static void readData() {
         try {
+            LineNumberReader lineReader = new LineNumberReader(new FileReader(input));
+            lineReader.skip(Long.MAX_VALUE);
+            maxLines = lineReader.getLineNumber();
+            lineReader.close();
+
+            list = new int[maxLines];
+
         	reader = new BufferedReader(new FileReader(input));
         	String line = null;
             
+            int iter = 0;
         	while((line = reader.readLine()) != null) {
-                	list.add(Integer.parseInt(line));
+                	list[iter] = Integer.parseInt(line);
+                    iter++;
             }
             
         } catch (FileNotFoundException e) {
@@ -54,7 +66,7 @@ public class Driver {
         }
     }
 
-    public static void writeData(ArrayList<Integer> list) {
+    public static void writeData(int[] list) {
         try {
             writer = new PrintWriter(output);
         } catch (FileNotFoundException e) {
@@ -63,10 +75,10 @@ public class Driver {
         }
         
         int count = 0;
-        int length = list.size();
+        int length = list.length;
         
         while (count < length) {
-            writer.println(list.get(count));
+            writer.println(list[count]);
             count = count + 1;
         }
         
@@ -87,16 +99,16 @@ public class Driver {
 
         readData();
 
-        ArrayList<Integer> sortedList = new ArrayList<Integer>();
+        int[] sortedList = new int[maxLines];
         HeapSort hsort = new HeapSort();
         sortedList = hsort.HeapSort(list);
         
-        
-        ArrayList<Integer> sortedList2 = new ArrayList<Integer>();
+        /*
+        int[] sortedList2 = new int[maxLines];
         MyInsertionSort insertionSort = new MyInsertionSort();
         System.loadLibrary("insertionSort");
         sortedList2 = insertionSort.insertionSort(list);
-        
+        */
         writeData(sortedList);
 		
 	}

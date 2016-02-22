@@ -7,18 +7,18 @@ import java.util.ArrayList;
 public class HeapSort {
 
     
-	public static ArrayList<Integer> HeapSort(ArrayList<Integer> Array) {
+	public static int[] HeapSort(int[] Array) {
 		
-		int count = Array.size();
+		int count = Array.length;
 		
 		heapify(Array, count);
 		
 		int end = count - 1;
 		
 		while (end > 0) {
-			int temp = Array.get(end);
-			Array.set(end, Array.get(0));
-			Array.set(0, temp);
+			int temp = Array[end];
+			Array[end] = Array[0];
+			Array[0] = temp;
 			
 			end = end - 1;
 			
@@ -29,7 +29,7 @@ public class HeapSort {
 	}	
 	
     
-	public static void heapify(ArrayList<Integer> Array, int count) {
+	public static void heapify(int[] Array, int count) {
 		int start = ((count-2)/2);
 		
 		while (start >= 0) {
@@ -40,26 +40,26 @@ public class HeapSort {
 	}
 	
     
-	public static void MoveDown(ArrayList<Integer> Array, int start, int end) {
+	public static void MoveDown(int[] Array, int start, int end) {
 		
 		int root = start;
 		
 		while (root*2 + 1 <= end) {
 			int child = root*2 + 1;
 			int swap = root;
-			if (Array.get(swap) < Array.get(child)) {
+			if (Array[swap] < Array[child]) {
 				swap = child; 
 				
 			}
 			if (child+1 <= end) {
-				if (Array.get(swap) < Array.get(child+1)) {
+				if (Array[swap] < Array[child+1]) {
 				swap = child + 1;
 				}
 			}
 			if (swap != root) {
-				int temp = Array.get(root);
-				Array.set(root, Array.get(swap));
-				Array.set(swap, temp);
+				int temp = Array[root];
+				Array[root] = Array[swap];
+				Array[swap] = temp;
 				
 				root = swap;
 				
