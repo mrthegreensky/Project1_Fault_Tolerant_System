@@ -4,14 +4,14 @@
 #include <string.h>
 #include "MyInsertionSort.h"
 
-jint* insertionSort(jint *list);
+int* insertionSort(jint *list);
 
 
 JNIEXPORT jintArray JNICALL Java_MyInsertionSort_insertionSort
 (JNIEnv *env, jobject object, jintArray list){
     jsize len;
     jint *myCopy;
-    jint *result;
+    jintArray result;
     jboolean *is_copy = 0;
     
     len = (*env)->GetArrayLength(env, list);
@@ -21,22 +21,27 @@ JNIEXPORT jintArray JNICALL Java_MyInsertionSort_insertionSort
         exit(0);
     }
     
-    myCopy = insertionSort(myCopy);
-    
-    return myCopy;
+    result = (*env)->NewIntArray(env, len);
+    if(result == NULL) {
+	pritnf("Cannot create array\n");
+	exit(0);
+    }
+
+    jint* temp = insertionSort(myCopy);
+
+    (*env)->SetIntArrayRegion(env, result, 0, len, temp);
+
+    return result;
     
 }
 
 
-jint* insertionSort(jint *old) {
+jint* insertionSort(jint *list) {
 
 	int num = 0;
 
 	int *temp;
-	int size = sizeof(old);
-
-	int* list = malloc(sizeof(int)*size);
-	memcpy(list, old, sizeof(int)*size);
+	int size = sizeof(list);
 
     /* insertion sort 
     code modified from http://www.programmingsimplified.com/c/source-code/c-program-insertion-sort

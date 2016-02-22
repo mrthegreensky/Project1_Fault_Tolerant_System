@@ -106,7 +106,7 @@ public class Driver {
         
         int[] sortedList2 = new int[maxLines];
         MyInsertionSort insertionSort = new MyInsertionSort();
-        System.loadLibrary("insertionSort");
+        System.loadLibrary("insertionsort");
         sortedList2 = insertionSort.insertionSort(list);
         
         writeData(sortedList2);
