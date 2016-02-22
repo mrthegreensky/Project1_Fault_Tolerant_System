@@ -87,12 +87,12 @@ public class Driver {
 
         readData();
 
-        private static ArrayList<Integer> sortedList = new ArrayList<Integer>();
+        ArrayList<Integer> sortedList = new ArrayList<Integer>();
         HeapSort hsort = new HeapSort();
         sortedList = hsort.HeapSort(list);
         
         
-        private static ArrayList<Integer> sortedList2 = new ArrayList<Integer>();
+        ArrayList<Integer> sortedList2 = new ArrayList<Integer>();
         MyInsertionSort insertionSort = new MyInsertionSort();
         System.loadLibrary("insertionSort");
         sortedList2 = insertionSort.insertionSort(list);
