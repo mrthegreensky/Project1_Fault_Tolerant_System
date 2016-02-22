@@ -1,0 +1,1 @@
+JNIEXPORT jintarray JNICALL Java_MyInsertionSort_insertionSort (JNIEnv *env, jobject object, jintArray list);
