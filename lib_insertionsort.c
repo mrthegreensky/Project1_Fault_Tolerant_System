@@ -18,13 +18,17 @@ JNIEXPORT jintArray JNICALL Java_MyInsertionSort_insertionSort
     myCopy = (jint *) (*env)->GetIntArrayElements(env, list, is_copy);
     if (myCopy == NULL){
         printf("Cannot obtain array from JVM\n");
-        exit(0);
+        exit(EXIT_FAILURE);
     }
     
+
+    /*Creating NewIntArray -- Passing Array Of Primitives
+    Code modified from: https://www3.ntu.edu.sg/home/ehchua/programming/java/JavaNativeInterface.html
+    */
     result = (*env)->NewIntArray(env, len);
     if(result == NULL) {
-	pritnf("Cannot create array\n");
-	exit(0);
+	   printf("Cannot create array\n");
+	   exit(EXIT_FAIURE);
     }
 
     jint* temp = insertionSort(myCopy);
@@ -58,12 +62,6 @@ jint* insertionSort(jint *list) {
 			current--;
 		}
 	}
-    
-    /*
-	for(iter = 0; iter < size; iter++) {
-		printf("%i\n", list[iter]);
-	}
-     */
 	
 	return list;
 }
