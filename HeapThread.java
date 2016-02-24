@@ -25,7 +25,7 @@ public class HeapThread extends Thread {
 		HeapSort hsort = new HeapSort();
         this.list = hsort.HeapSort(list);
         Random random = new Random();
-        double temp = Random.nextDouble();
+        double temp = random.nextDouble();
         if((temp <= min) || (temp >= (min+(hazard*hsort.getNumAccesses())))) {
         	System.out.println("temp is: " + temp + " upper bound is: " + (min+(hazard*hsort.getNumAccesses())));
         	this.finished = true;

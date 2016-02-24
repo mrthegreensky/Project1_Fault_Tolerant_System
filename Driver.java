@@ -112,6 +112,7 @@ public class Driver {
 
         readData();
 
+        /*
         int[] heapList = new int[maxLines];
         HeapThread heapThread = new HeapThread(list, hazard);
         
@@ -138,8 +139,11 @@ public class Driver {
         } else {
             System.out.println("HeapSort has failed");
         }
+        */
 
-        /*
+
+
+        WatchDog watchDog;        
         int[] insList = new int[maxLines];
         InsertionThread insertionThread = new InsertionThread(list, hazard);
 
@@ -164,7 +168,7 @@ public class Driver {
                 System.out.println("Checksum for InsertionSort has failed.");
             }
         }
-        */
+        
 	}
 
 

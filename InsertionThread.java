@@ -2,9 +2,11 @@ public class InsertionThread extends Thread {
 	
 	private static int[] list = null;
 	private static boolean finished = false;
+	private static double hazard = 0;
 
-	public InsertionThread(int[] list) {
+	public InsertionThread(int[] list, double hazard) {
 		this.list = list;
+		this.hazard = hazard;
 	}
 
 	public int[] getList() {
@@ -19,7 +21,7 @@ public class InsertionThread extends Thread {
 
         MyInsertionSort insertionSort = new MyInsertionSort();
         System.loadLibrary("insertionsort");
-        this.list = insertionSort.insertionSort(list);
+        this.list = insertionSort.insertionSort(list, hazard);
         this.finished = true;
 	}
 
