@@ -71,5 +71,6 @@ jint* insertionSort(jint *list, int size, double hazard) {
     double random = (double)rand()/(double)RAND_MAX;
     if((random >= 0.5) && (random <= (0.5+(hazard*numAccesses)))) {
         return NULL;
+    }
 	return list;
 }
