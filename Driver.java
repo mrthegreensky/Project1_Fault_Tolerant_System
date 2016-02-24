@@ -181,8 +181,9 @@ public class Driver {
 
         readData();
         
-        boolean heapSortWorked = performHeapThread();
-        if(!heapSortWorked) {
+        boolean didNotWork = false;
+        boolean heapSortStatus = performHeapThread();
+        if(heapSortStatus == didNotWork) {
             performInsertionThread();
         }
 	}
