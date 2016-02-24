@@ -6,6 +6,11 @@ import java.util.ArrayList;
  */
 public class HeapSort {
 
+    private static int numAccesses = 0;
+    
+    public static int getNumAccesses() {
+        return numAccesses;
+    }
     
 	public static int[] HeapSort(int[] Array) {
 		
@@ -23,6 +28,7 @@ public class HeapSort {
 			end = end - 1;
 			
 			MoveDown(Array, 0, end);
+            numAccesses += 36;
 		}
         
         return Array;
@@ -32,14 +38,17 @@ public class HeapSort {
 	public static void heapify(int[] Array, int count) {
 		int start = ((count-2)/2);
 		
+        numAccesses += 2;
+        
 		while (start >= 0) {
 			MoveDown(Array, start, count-1);
 			start = start -1;
+            numAccesses += 30;
 		}
         
 	}
-	
-    
+
+    //counted 28 accesses
 	public static void MoveDown(int[] Array, int start, int end) {
 		
 		int root = start;

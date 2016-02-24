@@ -14,7 +14,7 @@ public class Driver {
 
 	private static File input = null;
     private static File output = null;
-    private static double probability = 0;
+    private static double hazard = 0;
     private static int timeLimit = 0;
 
 
@@ -23,7 +23,7 @@ public class Driver {
         input = new File(args[0]); //input
         output = new File(args[1]); //output
         try {
-            probability = Double.parseDouble(args[2]);
+            hazard = Double.parseDouble(args[2]);
             timeLimit = Integer.parseInt(args[3]);
         } catch (NumberFormatException e) {
             System.err.println("Arguments " + args[2] + ", " + args[3] + "must be an double, integer respectively");
@@ -113,7 +113,7 @@ public class Driver {
         readData();
 
         int[] heapList = new int[maxLines];
-        HeapThread heapThread = new HeapThread(list);
+        HeapThread heapThread = new HeapThread(list, hazard);
         
         Timer timer = new Timer();
         WatchDog watchDog = new WatchDog(heapThread);
@@ -135,11 +135,13 @@ public class Driver {
             } else {
                 System.out.println("Checksum for HeapSort has failed.");
             }
+        } else {
+            System.out.println("HeapSort has failed");
         }
 
-        
+        /*
         int[] insList = new int[maxLines];
-        InsertionThread insertionThread = new InsertionThread(list);
+        InsertionThread insertionThread = new InsertionThread(list, hazard);
 
         Timer timer2 = new Timer();
         watchDog = new WatchDog(insertionThread);
@@ -162,7 +164,7 @@ public class Driver {
                 System.out.println("Checksum for InsertionSort has failed.");
             }
         }
-
+        */
 	}
 
 
