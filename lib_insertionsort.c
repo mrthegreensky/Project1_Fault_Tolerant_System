@@ -34,7 +34,7 @@ JNIEXPORT jintArray JNICALL Java_MyInsertionSort_insertionSort
 
     jint* temp = insertionSort(myCopy, len, hazard);
     if(temp == NULL) {
-        printf("Error has occured\n");
+        printf("Insertion Sort has failed\n");
         exit(1);
     }
 
@@ -69,10 +69,7 @@ jint* insertionSort(jint *list, int size, double hazard) {
 	}
 	srand(time(NULL));
     double random = (double)rand()/(double)RAND_MAX;
-printf("random is: %e", random);
     if((random >= 0.5) && (random <= (0.5+(hazard*numAccesses)))) {
         return NULL;
-    }
-	printf("I am returning\n");
 	return list;
 }

@@ -32,6 +32,7 @@ public class Driver {
     }
 
 
+
     /*LineNumberReader modified from: http://stackoverflow.com/questions/453018/number-of-lines-in-a-file-in-java*/
     public static void readData() {
         try {
@@ -68,6 +69,7 @@ public class Driver {
         }
     }
 
+
     public static void writeData(int[] list) {
         try {
             writer = new PrintWriter(output);
@@ -100,22 +102,10 @@ public class Driver {
     }
 
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-		if(args.length != 4) {
-			System.err.println("Accepts 4 arguments. Input file name, output file name, failure probabilities and time limit");
-			System.exit(1);
-		}
-
-        InitInputs(args);
-
-        readData();
-
-        /*
+    public static boolean performHeapThread() {
         int[] heapList = new int[maxLines];
         HeapThread heapThread = new HeapThread(list, hazard);
-        
+
         Timer timer = new Timer();
         WatchDog watchDog = new WatchDog(heapThread);
 
@@ -127,6 +117,7 @@ public class Driver {
             timer.cancel();
         } catch (InterruptedException e) {
             System.err.println("Caught InterruptedException: " + e.getMessage());
+            return false;
         }
 
         if(heapThread.getStatus()) {
@@ -135,29 +126,33 @@ public class Driver {
                 writeData(heapList);
             } else {
                 System.out.println("Checksum for HeapSort has failed.");
+                return false;
             }
         } else {
             System.out.println("HeapSort has failed");
+            return false;
         }
-        */
+
+        return true;
+    }
 
 
-
-        WatchDog watchDog;        
+    public static boolean performInsertionThread() {
         int[] insList = new int[maxLines];
         InsertionThread insertionThread = new InsertionThread(list, hazard);
 
-        Timer timer2 = new Timer();
-        watchDog = new WatchDog(insertionThread);
+        Timer timer = new Timer();
+        WatchDog watchDog = new WatchDog(insertionThread);
 
-        timer2.schedule(watchDog, timeLimit*1000);
+        timer.schedule(watchDog, timeLimit*1000);
         insertionThread.start();
 
         try {
             insertionThread.join();
-            timer2.cancel();
+            timer.cancel();
         } catch (InterruptedException e) {
             System.err.println("Caught InterruptedException: " + e.getMessage());
+            return false;
         }
 
         if(insertionThread.getStatus()) {
@@ -166,9 +161,30 @@ public class Driver {
                 writeData(insList);
             } else {
                 System.out.println("Checksum for InsertionSort has failed.");
+                return false;
             }
         }
+        return true;
+    }
+
+
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		if(args.length != 4) {
+			System.err.println("Accepts 4 arguments. Input file name, output file name, failure probabilities and time limit");
+			System.exit(1);
+		}
+
+        InitInputs(args);
+
+        readData();
         
+        boolean heapSortWorked = performHeapThread();
+        if(!heapSortWorked) {
+            performInsertionThread();
+        }
 	}
 
 
