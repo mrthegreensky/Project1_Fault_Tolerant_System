@@ -112,17 +112,28 @@ public class Driver {
 
         readData();
 
-        int[] sortedList = new int[maxLines];
-        HeapSort hsort = new HeapSort();
-        sortedList = hsort.HeapSort(list);
+        int[] heapList = new int[maxLines];
+        HeapThread heapThread = new HeapThread(list);
+        heapThread.run();
+        while(heapThread.isAlive()) {}
+        heapList = heapThread.getList();
+        if(checkSum(heapList)) {
+            writeData(heapList);
+        } 
 
-
-        int[] sortedList2 = new int[maxLines];
+        /*
+        int[] insList = new int[maxLines];
         MyInsertionSort insertionSort = new MyInsertionSort();
         System.loadLibrary("insertionsort");
-        sortedList2 = insertionSort.insertionSort(list);
-        
-        writeData(sortedList2);
-		
+        insList = insertionSort.insertionSort(list);
+
+        if(checkSum(heapList)) {
+            writeData(insList);
+        } else {
+            //Error
+        }
+        */
 	}
+
+
 }
