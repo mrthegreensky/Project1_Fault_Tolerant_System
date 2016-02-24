@@ -63,7 +63,7 @@ jint* insertionSort(jint *list, int size, double hazard) {
 			list[current-1] = tmp;
 
 			current--;
-            numAccesses += 7
+            numAccesses += 7;
 		}
 	}
     double random = (double)rand()/32767;

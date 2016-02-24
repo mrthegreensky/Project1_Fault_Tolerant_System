@@ -13,7 +13,7 @@ extern "C" {
  * Signature: ([I)[I
  */
 JNIEXPORT jintArray JNICALL Java_MyInsertionSort_insertionSort
-  (JNIEnv *, jobject, jintArray);
+  (JNIEnv *, jobject, jintArray, jdouble);
 
 #ifdef __cplusplus
 }
