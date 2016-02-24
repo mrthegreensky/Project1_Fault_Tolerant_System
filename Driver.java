@@ -111,7 +111,7 @@ public class Driver {
         InitInputs(args);
 
         readData();
-
+        /*
         int[] heapList = new int[maxLines];
         HeapThread heapThread = new HeapThread(list);
         heapThread.run();
@@ -120,19 +120,20 @@ public class Driver {
         if(checkSum(heapList)) {
             writeData(heapList);
         } 
-
-        /*
+*/
+        
         int[] insList = new int[maxLines];
-        MyInsertionSort insertionSort = new MyInsertionSort();
-        System.loadLibrary("insertionsort");
-        insList = insertionSort.insertionSort(list);
+        InsertionThread insertionThread = new InsertionThread(list);
+        insertionThread.run();
+        while(insertionThread.isAlive()) {}
+        insList = insertionThread.getList();
 
-        if(checkSum(heapList)) {
+        if(checkSum(insList)) {
             writeData(insList);
         } else {
             //Error
         }
-        */
+        
 	}
 
 
