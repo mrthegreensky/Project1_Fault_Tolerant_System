@@ -4,11 +4,11 @@
 #include <string.h>
 #include "MyInsertionSort.h"
 
-int* insertionSort(jint *list, int size);
+int* insertionSort(jint *list, int size, double hazard);
 
 
 JNIEXPORT jintArray JNICALL Java_MyInsertionSort_insertionSort
-(JNIEnv *env, jobject object, jintArray list){
+(JNIEnv *env, jobject object, jintArray list, jdouble hazard){
     jsize len;
     jint *myCopy;
     jintArray result;
@@ -31,7 +31,11 @@ JNIEXPORT jintArray JNICALL Java_MyInsertionSort_insertionSort
 	   exit(1);
     }
 
-    jint* temp = insertionSort(myCopy, len);
+    jint* temp = insertionSort(myCopy, len, hazard);
+    if(temp == NULL) {
+        printf("Error has occured");
+        exit(1);
+    }
 
     (*env)->SetIntArrayRegion(env, result, 0, len, temp);
 
@@ -40,27 +44,32 @@ JNIEXPORT jintArray JNICALL Java_MyInsertionSort_insertionSort
 }
 
 
-jint* insertionSort(jint *list, int size) {
+jint* insertionSort(jint *list, int size, double hazard) {
 
-	int num = 0;
+	int numAccesses = 0;
 
 	int *temp;
-	printf("size is: %d", size);
+    
     /* insertion sort 
     code modified from http://www.programmingsimplified.com/c/source-code/c-program-insertion-sort
     */
 	int current, tmp, iter;
 	for(iter = 0; iter < size; iter++) {
         current = iter;
-
+        numAccesses += 2;
 		while(current > 0 && list[current] < list[current-1]) {
 			tmp = list[current];
 			list[current] = list[current-1];
 			list[current-1] = tmp;
 
 			current--;
+            numAccesses += 7
 		}
 	}
+    double random = (double)rand()/32767;
+    if(random <= 0.5 || random >= (0.5+(hazard*numAccesses))) {
+        return NULL;
+    }
 	
 	return list;
 }
