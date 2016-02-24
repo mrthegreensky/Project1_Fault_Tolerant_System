@@ -4,7 +4,7 @@
 #include <string.h>
 #include "MyInsertionSort.h"
 
-int* insertionSort(jint *list);
+int* insertionSort(jint *list, int size);
 
 
 JNIEXPORT jintArray JNICALL Java_MyInsertionSort_insertionSort
@@ -18,7 +18,7 @@ JNIEXPORT jintArray JNICALL Java_MyInsertionSort_insertionSort
     myCopy = (jint *) (*env)->GetIntArrayElements(env, list, is_copy);
     if (myCopy == NULL){
         printf("Cannot obtain array from JVM\n");
-        exit(EXIT_FAILURE);
+        exit(1);
     }
     
 
@@ -28,10 +28,10 @@ JNIEXPORT jintArray JNICALL Java_MyInsertionSort_insertionSort
     result = (*env)->NewIntArray(env, len);
     if(result == NULL) {
 	   printf("Cannot create array\n");
-	   exit(EXIT_FAIURE);
+	   exit(1);
     }
 
-    jint* temp = insertionSort(myCopy);
+    jint* temp = insertionSort(myCopy, len);
 
     (*env)->SetIntArrayRegion(env, result, 0, len, temp);
 
@@ -40,13 +40,12 @@ JNIEXPORT jintArray JNICALL Java_MyInsertionSort_insertionSort
 }
 
 
-jint* insertionSort(jint *list) {
+jint* insertionSort(jint *list, int size) {
 
 	int num = 0;
 
 	int *temp;
-	int size = sizeof(list);
-
+	printf("size is: %d", size);
     /* insertion sort 
     code modified from http://www.programmingsimplified.com/c/source-code/c-program-insertion-sort
     */
