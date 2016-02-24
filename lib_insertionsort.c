@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "MyInsertionSort.h"
 
 int* insertionSort(jint *list, int size, double hazard);
@@ -33,7 +34,7 @@ JNIEXPORT jintArray JNICALL Java_MyInsertionSort_insertionSort
 
     jint* temp = insertionSort(myCopy, len, hazard);
     if(temp == NULL) {
-        printf("Error has occured");
+        printf("Error has occured\n");
         exit(1);
     }
 
@@ -66,10 +67,12 @@ jint* insertionSort(jint *list, int size, double hazard) {
             numAccesses += 7;
 		}
 	}
-    double random = (double)rand()/32767;
-    if(random <= 0.5 || random >= (0.5+(hazard*numAccesses))) {
+	srand(time(NULL));
+    double random = (double)rand()/(double)RAND_MAX;
+printf("random is: %e", random);
+    if((random >= 0.5) && (random <= (0.5+(hazard*numAccesses)))) {
         return NULL;
     }
-	
+	printf("I am returning\n");
 	return list;
 }
