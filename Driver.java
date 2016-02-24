@@ -1,6 +1,6 @@
 import java.io.*;
 import java.lang.*;
-import java.util.ArrayList;
+import java.util.Timer;
 
 
 public class Driver {
@@ -111,17 +111,33 @@ public class Driver {
         InitInputs(args);
 
         readData();
-        /*
+
         int[] heapList = new int[maxLines];
         HeapThread heapThread = new HeapThread(list);
-        heapThread.run();
-        while(heapThread.isAlive()) {}
-        heapList = heapThread.getList();
-        if(checkSum(heapList)) {
-            writeData(heapList);
-        } 
-*/
         
+        Timer timer = new Timer();
+        WatchDog watchDog = new WatchDog(heapThread);
+
+        timer.schedule(watchDog, timeLimit*1000);
+        heapThread.start();
+        
+        try{
+            heapThread.join();
+            timer.cancel();
+        } catch (InterruptedException e) {
+            System.err.println("Caught InterruptedException: " + e.getMessage());
+        }
+
+        if(heapThread.getStatus()) {
+            heapList = heapThread.getList();
+            if(checkSum(heapList)) {
+                writeData(heapList);
+            } else {
+                System.out.println("Checksum for HeapSort has failed.");
+            }
+        }
+
+        /*
         int[] insList = new int[maxLines];
         InsertionThread insertionThread = new InsertionThread(list);
         insertionThread.run();
@@ -133,7 +149,7 @@ public class Driver {
         } else {
             //Error
         }
-        
+        */
 	}
 
 
