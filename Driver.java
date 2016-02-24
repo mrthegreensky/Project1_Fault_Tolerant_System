@@ -137,19 +137,32 @@ public class Driver {
             }
         }
 
-        /*
+        
         int[] insList = new int[maxLines];
         InsertionThread insertionThread = new InsertionThread(list);
-        insertionThread.run();
-        while(insertionThread.isAlive()) {}
-        insList = insertionThread.getList();
 
-        if(checkSum(insList)) {
-            writeData(insList);
-        } else {
-            //Error
+        Timer timer2 = new Timer();
+        watchDog = new WatchDog(insertionThread);
+
+        timer2.schedule(watchDog, timeLimit*1000);
+        insertionThread.start();
+
+        try {
+            insertionThread.join();
+            timer2.cancel();
+        } catch (InterruptedException e) {
+            System.err.println("Caught InterruptedException: " + e.getMessage());
         }
-        */
+
+        if(insertionThread.getStatus()) {
+            insList = insertionThread.getList();
+            if(checkSum(insList)) {
+                writeData(insList);
+            } else {
+                System.out.println("Checksum for InsertionSort has failed.");
+            }
+        }
+
 	}
 
 

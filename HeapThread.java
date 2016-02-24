@@ -2,6 +2,7 @@ public class HeapThread extends Thread {
 	
 	private static int[] list = null;
 	private static boolean finished = false;
+	
 	public HeapThread(int[] list) {
 		this.list = list;
 	}
