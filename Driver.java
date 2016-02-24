@@ -10,6 +10,7 @@ public class Driver {
     private static BufferedReader reader = null;
     private static PrintWriter writer = null;
     private static int maxLines = 0;
+    private static int sum = 0;
 
 	private static File input = null;
     private static File output = null;
@@ -47,6 +48,7 @@ public class Driver {
             int iter = 0;
         	while((line = reader.readLine()) != null) {
                 	list[iter] = Integer.parseInt(line);
+                    sum += list[iter];
                     iter++;
             }
             
@@ -85,6 +87,17 @@ public class Driver {
         writer.close();
     }
 
+    public static boolean checkSum(int[] list) {
+        int tempSum =0;
+
+        for(int i : list) {
+            tempSum += i;
+        }
+        if(tempSum == sum) {
+            return true;
+        }
+        return false;
+    }
 
 
 	public static void main(String[] args) {
@@ -102,8 +115,8 @@ public class Driver {
         int[] sortedList = new int[maxLines];
         HeapSort hsort = new HeapSort();
         sortedList = hsort.HeapSort(list);
-        
-        
+
+
         int[] sortedList2 = new int[maxLines];
         MyInsertionSort insertionSort = new MyInsertionSort();
         System.loadLibrary("insertionsort");
