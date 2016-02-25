@@ -23,14 +23,14 @@ public class HeapThread extends Thread {
 	public void run() {
 
 		HeapSort hsort = new HeapSort();
-        this.list = hsort.HeapSort(list);
-        Random random = new Random();
-        double temp = random.nextDouble();
-        if((temp <= min) || (temp >= (min+(hazard*hsort.getNumAccesses())))) {
-        	this.finished = true;
-        } else {
-            System.out.println("HeapSort has failed");
-        }
+		this.list = hsort.HeapSort(list);
+		Random random = new Random();
+		double temp = random.nextDouble();
+		if((temp <= min) || (temp >= (min+(hazard*hsort.getNumAccesses())))) {
+			this.finished = true;
+		} else {
+			System.out.println("HeapSort has failed");
+		}
 	}
 
 }

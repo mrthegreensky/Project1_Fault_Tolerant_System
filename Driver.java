@@ -5,14 +5,14 @@ import java.util.Timer;
 
 public class Driver {
 
-	/* variables */
+    /* variables */
     private static int[] list = null;
     private static BufferedReader reader = null;
     private static PrintWriter writer = null;
     private static int maxLines = 0;
     private static int sum = 0;
 
-	private static File input = null;
+    private static File input = null;
     private static File output = null;
     private static double pPrimary = 0;
     private static double pSecondary = 0;
@@ -20,7 +20,7 @@ public class Driver {
 
 
     /* methods */
-	public static void InitInputs(String[] args) {
+    public static void InitInputs(String[] args) {
         input = new File(args[0]); //input
         output = new File(args[1]); //output
         try {
@@ -45,19 +45,19 @@ public class Driver {
 
             list = new int[maxLines];
 
-        	reader = new BufferedReader(new FileReader(input));
-        	String line = null;
+            reader = new BufferedReader(new FileReader(input));
+            String line = null;
             
             int iter = 0;
-        	while((line = reader.readLine()) != null) {
-                	list[iter] = Integer.parseInt(line);
+            while((line = reader.readLine()) != null) {
+                    list[iter] = Integer.parseInt(line);
                     sum += list[iter];
                     iter++;
             }
             
         } catch (FileNotFoundException e) {
-        	System.err.println("Caught FileNotFoundException: " + e.getMessage());
-        	System.exit(1);
+            System.err.println("Caught FileNotFoundException: " + e.getMessage());
+            System.exit(1);
         } catch (IOException e) {
             System.err.println("Caught IOException: " + e.getMessage());
             System.exit(1);
@@ -170,13 +170,13 @@ public class Driver {
 
 
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
 
-		if(args.length != 5) {
-			System.err.println("Accepts 5 arguments. Input file name, output file name, failure probability for primary, failure probability for secondary and time limit (in seconds)");
-			System.exit(1);
-		}
+        if(args.length != 5) {
+            System.err.println("Accepts 5 arguments. Input file name, output file name, failure probability for primary, failure probability for secondary and time limit (in seconds)");
+            System.exit(1);
+        }
 
         InitInputs(args);
 
@@ -187,7 +187,7 @@ public class Driver {
         if(heapSortStatus == didNotWork) {
             performInsertionThread();
         }
-	}
+    }
 
 
 }

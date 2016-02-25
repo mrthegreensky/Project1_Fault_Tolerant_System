@@ -25,7 +25,7 @@ Thread watched;
 	public void run() {
 		
 		watched.stop();
-        System.out.println("Time limit reached. WatchDog has stopped running thread.");
+		System.out.println("Time limit reached. WatchDog has stopped running thread.");
 	}
 
 }

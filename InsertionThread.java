@@ -19,10 +19,10 @@ public class InsertionThread extends Thread {
 
 	public void run() {
 
-        MyInsertionSort insertionSort = new MyInsertionSort();
-        System.loadLibrary("insertionsort");
-        this.list = insertionSort.insertionSort(list, hazard);
-        this.finished = true;
+		MyInsertionSort insertionSort = new MyInsertionSort();
+		System.loadLibrary("insertionsort");
+		this.list = insertionSort.insertionSort(list, hazard);
+		this.finished = true;
 	}
 
 }
