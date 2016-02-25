@@ -14,7 +14,8 @@ public class Driver {
 
 	private static File input = null;
     private static File output = null;
-    private static double hazard = 0;
+    private static double pPrimary = 0;
+    private static double pSecondary = 0;
     private static int timeLimit = 0;
 
 
@@ -23,10 +24,11 @@ public class Driver {
         input = new File(args[0]); //input
         output = new File(args[1]); //output
         try {
-            hazard = Double.parseDouble(args[2]);
-            timeLimit = Integer.parseInt(args[3]);
+            pPrimary = Double.parseDouble(args[2]);
+            pSecondary = Double.parseDouble(args[3]);
+            timeLimit = Integer.parseInt(args[4]);
         } catch (NumberFormatException e) {
-            System.err.println("Arguments " + args[2] + ", " + args[3] + "must be an double, integer respectively");
+            System.err.println("Arguments " + args[2] + ", " + args[3] + ", " + args[4] + "must be an double, double, integer respectively");
             System.exit(1);
         }
     }
@@ -104,7 +106,7 @@ public class Driver {
 
     public static boolean performHeapThread() {
         int[] heapList = new int[maxLines];
-        HeapThread heapThread = new HeapThread(list, hazard);
+        HeapThread heapThread = new HeapThread(list, pPrimary);
 
         Timer timer = new Timer();
         WatchDog watchDog = new WatchDog(heapThread);
@@ -139,7 +141,7 @@ public class Driver {
 
     public static boolean performInsertionThread() {
         int[] insList = new int[maxLines];
-        InsertionThread insertionThread = new InsertionThread(list, hazard);
+        InsertionThread insertionThread = new InsertionThread(list, pSecondary);
 
         Timer timer = new Timer();
         WatchDog watchDog = new WatchDog(insertionThread);
@@ -172,8 +174,8 @@ public class Driver {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		if(args.length != 4) {
-			System.err.println("Accepts 4 arguments. Input file name, output file name, failure probabilities and time limit");
+		if(args.length != 5) {
+			System.err.println("Accepts 5 arguments. Input file name, output file name, failure probability for primary, failure probability for secondary and time limit (in seconds)");
 			System.exit(1);
 		}
 
