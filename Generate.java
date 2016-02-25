@@ -3,6 +3,27 @@ import java.util.Random;
 
 public class Generate {
 
+    
+    public static void writeData(File file, int numvar) {
+        PrintWriter writer = null;
+        
+        int max = numvar+1000;
+        
+        try {
+            writer = new PrintWriter(file);
+        } catch (FileNotFoundException e) {
+            System.err.println("Caught FileNotfoundException: " + e.getMessage());
+            System.exit(1);
+        } finally {
+            Random random = new Random();
+            
+            for(int iter = 0; iter < numvar; iter++) {
+                writer.println(random.nextInt(max));
+            }
+            
+            writer.close();
+        }    }
+    
 	/* maybe add try finally block*/
 	public static void main(String[] args) {
 
@@ -21,24 +42,9 @@ public class Generate {
 		}
 
 		File file = new File(filename);
-		PrintWriter writer = null;
 
-		int max = numvar+1000;
-
-		try {
-			writer = new PrintWriter(file);
-		} catch (FileNotFoundException e) {
-			System.err.println("Caught FileNotfoundException: " + e.getMessage());
-			System.exit(1);
-		} finally {
-			Random random = new Random();
-		
-			for(int iter = 0; iter < numvar; iter++) {
-				writer.println(random.nextInt(max));
-			}
-
-			writer.close();
-		}
+        writeData(file, numvar);
+        
 	}
 
 }
