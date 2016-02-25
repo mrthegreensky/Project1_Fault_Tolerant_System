@@ -28,7 +28,9 @@ public class HeapThread extends Thread {
         double temp = random.nextDouble();
         if((temp <= min) || (temp >= (min+(hazard*hsort.getNumAccesses())))) {
         	this.finished = true;
-        } 
+        } else {
+            System.out.println("HeapSort has failed");
+        }
 	}
 
 }

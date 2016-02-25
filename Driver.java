@@ -130,9 +130,6 @@ public class Driver {
                 System.out.println("Checksum for HeapSort has failed.");
                 return false;
             }
-        } else {
-            System.out.println("HeapSort has failed");
-            return false;
         }
 
         return true;
