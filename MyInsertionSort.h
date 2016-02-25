@@ -10,7 +10,7 @@ extern "C" {
 /*
  * Class:     MyInsertionSort
  * Method:    insertionSort
- * Signature: ([I)[I
+ * Signature: ([ID)[I
  */
 JNIEXPORT jintArray JNICALL Java_MyInsertionSort_insertionSort
   (JNIEnv *, jobject, jintArray, jdouble);
