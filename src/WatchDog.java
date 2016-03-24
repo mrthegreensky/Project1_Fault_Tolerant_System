@@ -9,7 +9,6 @@ import java.util.TimerTask;
 /**
  * @author dick
  * Modified by Andrew Zhong
- 
  */
 public class WatchDog extends TimerTask {
 

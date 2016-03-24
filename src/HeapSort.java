@@ -7,11 +7,11 @@ import java.util.ArrayList;
 public class HeapSort {
 
 	private static int numAccesses = 0;
-    
+	
 	public static int getNumAccesses() {
 		return numAccesses;
 	}
-    
+	
 	public static int[] HeapSort(int[] Array) {
 		
 		int count = Array.length;
@@ -34,7 +34,7 @@ public class HeapSort {
 		return Array;
 	}	
 	
-    
+	
 	public static void heapify(int[] Array, int count) {
 		int start = ((count-2)/2);
 		
@@ -77,5 +77,5 @@ public class HeapSort {
 			}
 		}
 	}
-    
+	
 }
